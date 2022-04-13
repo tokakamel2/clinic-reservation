@@ -18,14 +18,24 @@ public class AdminService {
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
         DoctorService doctorService = new DoctorService();
+        AssistantService assistantService = new AssistantService();
         switch (choice){
             case "1":
-
                 doctorService.listAllDoctors();
+                displayMenu();
+                break;
+            case "2":
+                assistantService.listAllAssistants();
                 displayMenu();
                 break;
             case "4":
                 doctorService.addNewDoctor();
+                displayMenu();
+                break;
+            case "5":
+                assistantService.addNewAssistant();
+                displayMenu();
+                break;
             default:
                 System.out.println("invalid input");
                 displayMenu();

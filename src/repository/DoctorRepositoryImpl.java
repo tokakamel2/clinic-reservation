@@ -55,6 +55,8 @@ public class DoctorRepositoryImpl implements DoctorRepository{
                 doctor.getRole()+"', '"+doctor.getPhoneNumber()+"', '"+doctor.getSpeciality()+"' )";
         DataBaseConnectivity.connection.createStatement();
         DataBaseConnectivity.statement = DataBaseConnectivity.connection.createStatement();
+        DataBaseConnectivity.statement.executeUpdate(sqlStatement);
+
 
     }
 
