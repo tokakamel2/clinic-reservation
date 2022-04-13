@@ -22,12 +22,15 @@ public class AppUserService {
                    break;
                case DOCTOR:
                    DoctorService doctorService = new DoctorService();
+                   doctorService.displayMenu();
                    break;
                case ASSISTANT:
                    AssistantService assistantService = new AssistantService();
+                   assistantService.displayMenu();
                    break;
                case PATIENT:
                    PatientService patientService = new PatientService();
+                   patientService.displayMenu();
                    break;
                default:
                    System.out.println("error happened, Role is not valid");

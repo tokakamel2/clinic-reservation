@@ -12,6 +12,14 @@ public class DoctorService {
 
    DoctorRepositoryImpl doctorRepository = new DoctorRepositoryImpl();
 
+   void displayMenu(){
+       System.out.println("choose the action you want to do: ");
+       System.out.println("1. list today's reservations");
+       System.out.println("2. mark reservation as done");
+       Scanner scanner = new Scanner(System.in);
+       scanner.nextLine();
+   }
+
    void listAllDoctors() throws SQLException {
      List<Doctor> doctors= doctorRepository.findAll();
 
@@ -45,5 +53,19 @@ public class DoctorService {
        doctor.setPhoneNumber(phone);
        doctor.setRole("DOCTOR");
        doctorRepository.addNew(doctor);
+   }
+   void updateDoctor(){
+       Scanner scanner = new Scanner(System.in);
+
+       Doctor doctor = new Doctor();
+       System.out.println("Enter the number the action you want: ");
+       System.out.println("1. change name");
+       System.out.println("2. change speciality");
+       System.out.println("3. change phone number");
+       String choice = scanner.nextLine();
+       switch (choice){
+           case "1":
+
+       }
    }
 }

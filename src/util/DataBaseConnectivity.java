@@ -36,12 +36,18 @@ public class DataBaseConnectivity {
         String doctorSQL = "CREATE TABLE IF NOT EXISTS DOCTOR" +
                 "(speciality VARCHAR(255) "+
                 ") INHERITS (APPUSER)";
+        String patientSQL = "CREATE TABLE IF NOT EXISTS PATIENT" +
+                "(history VARCHAR(255), "+
+                "age INT,"+
+                "gender VARCHAR(255)"+
+                ") INHERITS (APPUSER)";
         String assistantSQL = "CREATE TABLE IF NOT EXISTS ASSISTANT" +
                 "( ) INHERITS (APPUSER)";
 
         statement.executeUpdate(sql);
         statement.executeUpdate(doctorSQL);
         statement.executeUpdate(assistantSQL);
+        statement.executeUpdate(patientSQL);
         UUID id = UUID.randomUUID();
         String addAdmin = "INSERT INTO APPUSER "+
                 "(id,name, username, password, role, phonenumber) "+

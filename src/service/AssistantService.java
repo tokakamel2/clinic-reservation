@@ -12,6 +12,15 @@ import java.util.UUID;
 public class AssistantService {
     AssistantRepositoryImpl assistantRepository = new AssistantRepositoryImpl();
 
+    void displayMenu(){
+        System.out.println("choose the action you want to do: ");
+        System.out.println("1. add new patient");
+        System.out.println("2. update patient");
+        System.out.println("3. list today's reservations ");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+    }
+
     void listAllAssistants() throws SQLException {
         List<Assistant> assistants= assistantRepository.findAll();
 

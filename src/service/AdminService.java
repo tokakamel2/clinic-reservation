@@ -19,6 +19,7 @@ public class AdminService {
         String choice = scanner.nextLine();
         DoctorService doctorService = new DoctorService();
         AssistantService assistantService = new AssistantService();
+        PatientService patientService = new PatientService();
         switch (choice){
             case "1":
                 doctorService.listAllDoctors();
@@ -28,6 +29,9 @@ public class AdminService {
                 assistantService.listAllAssistants();
                 displayMenu();
                 break;
+            case "3":
+                patientService.listAllPatients();
+                displayMenu();
             case "4":
                 doctorService.addNewDoctor();
                 displayMenu();
