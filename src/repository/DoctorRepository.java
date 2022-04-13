@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public interface DoctorRepository extends CRUDOperations<Doctor>{
 
-
+ Doctor findByUserName();
 }

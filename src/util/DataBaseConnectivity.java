@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.UUID;
 
 public class DataBaseConnectivity {
 
@@ -12,8 +13,10 @@ public class DataBaseConnectivity {
     static final String user = "postgres";
     static final String password ="1234";
 
-    static Connection connection = null;
-    static Statement statement = null;
+    public static Connection connection = null;
+    public static Statement statement = null;
+
+
 
     public static void connect() {
     try{
@@ -30,9 +33,19 @@ public class DataBaseConnectivity {
                 "role VARCHAR(255), "+
                 "phonenumber VARCHAR(255), "+
                 "PRIMARY KEY ( id ))";
+        String doctorSQL = "CREATE TABLE IF NOT EXISTS DOCTOR" +
+                "(speciality VARCHAR(255) "+
+                ") INHERITS (APPUSER)";
+
         statement.executeUpdate(sql);
+        statement.executeUpdate(doctorSQL);
+        UUID id = UUID.randomUUID();
+        String addAdmin = "INSERT INTO APPUSER "+
+                "(id,name, username, password, role, phonenumber) "+
+                "VALUES ('"+id+"' ,'admin','admin','admin','ADMIN', '01099999999')";
+      //  statement. executeUpdate(addAdmin);
         statement.close();
-        connection.close();
+      //  connection.close();
 
     }catch (SQLException exception){
         exception.printStackTrace();

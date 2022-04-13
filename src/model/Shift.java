@@ -1,14 +1,16 @@
 package model;
 
 
+import util.DataTypes;
+
 import java.util.UUID;
 
 public class Shift {
 
-    enum Day {SATURDAY,SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY}
+
 
     private UUID id;
-    private Day day;
+    private DataTypes.Day day;
     private Doctor doctor;
     private int from;
     private int to;

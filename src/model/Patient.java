@@ -1,11 +1,11 @@
 package model;
 
-public class Patient extends AppUser{
+import util.DataTypes;
 
-    enum Gender {MALE,FEMALE}
+public class Patient extends AppUser{
 
     private String history;
     private int age;
-    private Gender gender;
+    private DataTypes.Gender gender;
 
 }
