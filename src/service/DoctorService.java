@@ -3,7 +3,9 @@ package service;
 import model.Doctor;
 import repository.DoctorRepositoryImpl;
 
+import javax.print.Doc;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -28,6 +30,9 @@ public class DoctorService {
         System.out.println(doctors.get(i).getName());
      }
    }
+    List<Doctor> getAllDoctors() throws SQLException {
+        return doctorRepository.findAll();
+    }
    void addNewDoctor() throws SQLException {
        Scanner scanner = new Scanner(System.in);
 
@@ -68,4 +73,36 @@ public class DoctorService {
 
        }
    }
+    void listAllSpecialities() throws SQLException {
+      List<Doctor> doctors =  doctorRepository.findAll();
+      List<String> specialities =new ArrayList<>();
+      specialities.add(doctors.get(0).getSpeciality());
+
+      for(int i = 0; i<doctors.size();i++){
+          if(!specialities.contains(doctors.get(i).getSpeciality())){
+              specialities.add(doctors.get(i).getSpeciality());
+
+          }
+      }
+      for(int i=0; i<specialities.size();i++){
+          System.out.println(i+1+" "+ specialities.get(i));
+
+      }
+
+    }
+    UUID chooseDoctor() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+
+        List<Doctor> doctors=  getAllDoctors();
+        for(int i=0; i< doctors.size() ;i++){
+            System.out.println(i+1 + doctors.get(i).getName());
+        }
+        System.out.println("Enter the number of the doctor you want to add shift to: ");
+        int choice = scanner.nextInt();
+        if(choice-1 <0 || choice-1 >= doctors.size()){
+            throw new RuntimeException("invalid input");
+        }
+        UUID doctorID = doctors.get(choice-1).getId();
+        return doctorID;
+    }
 }

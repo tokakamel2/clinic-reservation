@@ -14,14 +14,22 @@ import java.util.UUID;
 public class PatientService {
 
     PatientRepositoryImpl patientRepository = new PatientRepositoryImpl();
+    DoctorService doctorService = new DoctorService();
 
-    void displayMenu(){
+    void displayMenu() throws SQLException {
         System.out.println("choose the action you want to do: ");
         System.out.println("1. list all doctors");
         System.out.println("2. list all specialities ");
         System.out.println("3. make a reservation ");
         Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
+        String choice = scanner.nextLine();
+        switch (choice){
+            case "1":
+                doctorService.listAllDoctors();
+            case "2":
+                doctorService.listAllSpecialities();
+
+        }
     }
 
     void listAllPatients() throws SQLException {

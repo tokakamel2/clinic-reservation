@@ -11,14 +11,23 @@ import java.util.UUID;
 
 public class AssistantService {
     AssistantRepositoryImpl assistantRepository = new AssistantRepositoryImpl();
+    PatientService patientService = new PatientService();
 
-    void displayMenu(){
+    void displayMenu() throws SQLException {
         System.out.println("choose the action you want to do: ");
         System.out.println("1. add new patient");
         System.out.println("2. update patient");
         System.out.println("3. list today's reservations ");
         Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
+        String choice =scanner.nextLine();
+        switch(choice){
+            case "1":
+                patientService.addNewPatient();
+                displayMenu();
+                break;
+            case "2":
+
+        }
     }
 
     void listAllAssistants() throws SQLException {
@@ -28,6 +37,9 @@ public class AssistantService {
             System.out.println(i);
             System.out.println(assistants.get(i).getName());
         }
+    }
+    List<Assistant> getAllAssistants() throws SQLException {
+        return assistantRepository.findAll();
     }
     void addNewAssistant() throws SQLException {
         Assistant assistant = new Assistant();
@@ -52,5 +64,18 @@ public class AssistantService {
         assistant.setPhoneNumber(phone);
         assistant.setRole("ASSISTANT");
         assistantRepository.addNew(assistant);
+    }
+    UUID chooseAssistant() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        List<Assistant> assistants = getAllAssistants();
+        for(int i=0; i< assistants.size() ;i++){
+            System.out.println(i+1 + assistants.get(i).getName());
+        }
+        int choice = scanner.nextInt();
+        if(choice-1 <0 || choice-1 >= assistants.size()){
+            throw new RuntimeException("invalid input");
+        }
+        UUID assistantID = assistants.get(choice-1).getId();
+        return assistantID;
     }
 }

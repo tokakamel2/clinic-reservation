@@ -25,7 +25,7 @@ public class DataBaseConnectivity {
         connection = DriverManager.getConnection(DB_URL,user,password);
 
         statement= connection.createStatement();
-        String sql = "CREATE TABLE IF NOT EXISTS APPUSER" +
+        String appUserSQL = "CREATE TABLE IF NOT EXISTS APPUSER" +
                 "(id UUID not NULL, "+
                 "name VARCHAR(255), "+
                 "username VARCHAR(255), "+
@@ -43,11 +43,30 @@ public class DataBaseConnectivity {
                 ") INHERITS (APPUSER)";
         String assistantSQL = "CREATE TABLE IF NOT EXISTS ASSISTANT" +
                 "( ) INHERITS (APPUSER)";
+        String reservationSQL= "CREATE TABLE IF NOT EXISTS RESERVATION "+
+                "(id UUID not NULL, "+
+                "status BOOLEAN, "+
+                "patientID VARCHAR(255), "+
+                "assistantID VARCHAR(255), "+
+                "doctorID VARCHAR(255), "+
+                "PRIMARY KEY ( id ))";
+        String shiftSQL= "CREATE TABLE IF NOT EXISTS SHIFT "+
+                "(id UUID not NULL, "+
+                "day VARCHAR(255), "+
+                "doctorID VARCHAR(255), "+
+                "assistantID VARCHAR(255), "+
+                "fromH INT, "+
+                "toH INT, "+
+                "PRIMARY KEY ( id ))";
 
-        statement.executeUpdate(sql);
+
+        statement.executeUpdate(appUserSQL);
         statement.executeUpdate(doctorSQL);
         statement.executeUpdate(assistantSQL);
         statement.executeUpdate(patientSQL);
+        statement.executeUpdate(reservationSQL);
+        statement.executeUpdate(shiftSQL);
+
         UUID id = UUID.randomUUID();
         String addAdmin = "INSERT INTO APPUSER "+
                 "(id,name, username, password, role, phonenumber) "+

@@ -14,12 +14,14 @@ public class AdminService {
         System.out.println("5. add new assistant");
         System.out.println("6. update doctor");
         System.out.println("7. update assistant");
+        System.out.println("8. add new shift");
 
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
         DoctorService doctorService = new DoctorService();
         AssistantService assistantService = new AssistantService();
         PatientService patientService = new PatientService();
+        ShiftService shiftService = new ShiftService();
         switch (choice){
             case "1":
                 doctorService.listAllDoctors();
@@ -38,6 +40,10 @@ public class AdminService {
                 break;
             case "5":
                 assistantService.addNewAssistant();
+                displayMenu();
+                break;
+            case "8":
+                shiftService.createNewShift();
                 displayMenu();
                 break;
             default:

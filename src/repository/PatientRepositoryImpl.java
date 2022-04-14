@@ -27,7 +27,7 @@ public class PatientRepositoryImpl implements PatientRepository{
             String password  = resultSet.getString("password");
             String  username1 = resultSet.getString("username");
             String role = resultSet.getString("role");
-            String speciality = resultSet.getString("speciality");
+
 
             patient.setUserName(username1);
             patient.setName(name);
