@@ -10,7 +10,7 @@ public interface CRUDOperations<type> {
 
 
     List<type> findAll() throws SQLException;
-    type findById(UUID id);
+    type findById(UUID id) throws SQLException;
 
     void addNew(type type) throws SQLException;
     void deleteById(UUID id);

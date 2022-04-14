@@ -109,4 +109,18 @@ public class ShiftService {
         shiftRepository.addNew(shift);
 
     }
+    List<Shift> findShiftByDayAndSpeciality(DataTypes.Day day, String speciality) throws SQLException {
+
+       List<Shift> shiftsByDay= shiftRepository.findByDay(day.toString());
+
+       List<Shift> shiftsByDayAndSpeciality = new ArrayList<>();
+       for(int i=0; i<shiftsByDay.size(); i++){
+          UUID doctorId = shiftsByDay.get(i).getDoctorID();
+          Doctor doctor = doctorService.findById(doctorId);
+          if(doctor.getSpeciality() == speciality){
+              shiftsByDayAndSpeciality.add(shiftsByDay.get(i));
+          }
+       }
+       return shiftsByDayAndSpeciality;
+    }
 }

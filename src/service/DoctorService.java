@@ -90,6 +90,38 @@ public class DoctorService {
       }
 
     }
+    List<String> getAllSpecialities() throws SQLException {
+        List<Doctor> doctors =  doctorRepository.findAll();
+        List<String> specialities =new ArrayList<>();
+        specialities.add(doctors.get(0).getSpeciality());
+
+        for(int i = 0; i<doctors.size();i++){
+            if(!specialities.contains(doctors.get(i).getSpeciality())){
+                specialities.add(doctors.get(i).getSpeciality());
+
+            }
+        }
+        for(int i=0; i<specialities.size();i++){
+            System.out.println(i+1+" "+ specialities.get(i));
+
+        }
+        return specialities;
+
+    }
+    String chooseSpeciality() throws SQLException {
+
+       Scanner scanner = new Scanner(System.in);
+
+       List<String> specialities = getAllSpecialities();
+       System.out.println("Enter the number of the speciality you want: ");
+       int choice = scanner.nextInt();
+       if(choice-1 <0 || choice-1 >= specialities.size()){
+           throw new RuntimeException("invalid input");
+       }
+       String speciality = specialities.get(choice-1);
+       return speciality;
+   }
+
     UUID chooseDoctor() throws SQLException {
         Scanner scanner = new Scanner(System.in);
 
@@ -104,5 +136,8 @@ public class DoctorService {
         }
         UUID doctorID = doctors.get(choice-1).getId();
         return doctorID;
+    }
+    Doctor findById(UUID id) throws SQLException {
+      return doctorRepository.findById(id);
     }
 }

@@ -30,7 +30,7 @@ public class AppUserService {
                    break;
                case PATIENT:
                    PatientService patientService = new PatientService();
-                   patientService.displayMenu();
+                   patientService.displayMenu(appUser.getId());
                    break;
                default:
                    System.out.println("error happened, Role is not valid");

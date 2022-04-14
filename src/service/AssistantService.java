@@ -10,10 +10,11 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class AssistantService {
-    AssistantRepositoryImpl assistantRepository = new AssistantRepositoryImpl();
-    PatientService patientService = new PatientService();
+
 
     void displayMenu() throws SQLException {
+
+        PatientService patientService = new PatientService();
         System.out.println("choose the action you want to do: ");
         System.out.println("1. add new patient");
         System.out.println("2. update patient");
@@ -31,6 +32,7 @@ public class AssistantService {
     }
 
     void listAllAssistants() throws SQLException {
+        AssistantRepositoryImpl assistantRepository = new AssistantRepositoryImpl();
         List<Assistant> assistants= assistantRepository.findAll();
 
         for (int i=0; i<assistants.size();i++){
@@ -39,9 +41,11 @@ public class AssistantService {
         }
     }
     List<Assistant> getAllAssistants() throws SQLException {
+        AssistantRepositoryImpl assistantRepository = new AssistantRepositoryImpl();
         return assistantRepository.findAll();
     }
     void addNewAssistant() throws SQLException {
+        AssistantRepositoryImpl assistantRepository = new AssistantRepositoryImpl();
         Assistant assistant = new Assistant();
         Scanner scanner = new Scanner(System.in);
 

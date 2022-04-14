@@ -15,8 +15,9 @@ public class PatientService {
 
     PatientRepositoryImpl patientRepository = new PatientRepositoryImpl();
     DoctorService doctorService = new DoctorService();
+    ReservationService reservationService = new ReservationService();
 
-    void displayMenu() throws SQLException {
+    void displayMenu(UUID patientID) throws SQLException {
         System.out.println("choose the action you want to do: ");
         System.out.println("1. list all doctors");
         System.out.println("2. list all specialities ");
@@ -26,8 +27,13 @@ public class PatientService {
         switch (choice){
             case "1":
                 doctorService.listAllDoctors();
+                break;
             case "2":
                 doctorService.listAllSpecialities();
+                break;
+            case "3":
+                reservationService.addNewReservation(patientID);
+
 
         }
     }

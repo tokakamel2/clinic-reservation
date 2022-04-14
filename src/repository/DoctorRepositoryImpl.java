@@ -43,8 +43,63 @@ public class DoctorRepositoryImpl implements DoctorRepository{
     }
 
     @Override
-    public Doctor findById(UUID id) {
-        return null;
+    public Doctor findById(UUID idQ) throws SQLException {
+        String sqlStatement= "SELECT * FROM DOCTOR WHERE ID = '"+idQ+"'";
+        DataBaseConnectivity.connection.createStatement();
+        DataBaseConnectivity.statement = DataBaseConnectivity.connection.createStatement();
+        ResultSet resultSet = DataBaseConnectivity.statement.executeQuery(sqlStatement);
+
+        List<Doctor> doctors = new ArrayList<>();
+        while ( resultSet.next() ) {
+            Doctor doctor = new Doctor();
+
+            String id = resultSet.getString("id");
+            String  name = resultSet.getString("name");
+            String password  = resultSet.getString("password");
+            String  username1 = resultSet.getString("username");
+            String role = resultSet.getString("role");
+            String speciality = resultSet.getString("speciality");
+
+            doctor.setUserName(username1);
+            doctor.setName(name);
+            doctor.setId(id);
+            doctor.setPassword(password);
+            doctor.setRole(role);
+            doctor.setSpeciality(speciality);
+
+            doctors.add(doctor);
+        }
+        return doctors.get(0);
+    }
+
+    @Override
+    public Doctor findBySpeciality(String specialityQ) throws SQLException {
+        String sqlStatement= "SELECT * FROM DOCTOR WHERE SPECIALITY = '"+specialityQ+"'";
+        DataBaseConnectivity.connection.createStatement();
+        DataBaseConnectivity.statement = DataBaseConnectivity.connection.createStatement();
+        ResultSet resultSet = DataBaseConnectivity.statement.executeQuery(sqlStatement);
+
+        List<Doctor> doctors = new ArrayList<>();
+        while ( resultSet.next() ) {
+            Doctor doctor = new Doctor();
+
+            String id = resultSet.getString("id");
+            String  name = resultSet.getString("name");
+            String password  = resultSet.getString("password");
+            String  username1 = resultSet.getString("username");
+            String role = resultSet.getString("role");
+            String speciality = resultSet.getString("speciality");
+
+            doctor.setUserName(username1);
+            doctor.setName(name);
+            doctor.setId(id);
+            doctor.setPassword(password);
+            doctor.setRole(role);
+            doctor.setSpeciality(speciality);
+
+            doctors.add(doctor);
+        }
+        return doctors.get(0);
     }
 
     @Override
